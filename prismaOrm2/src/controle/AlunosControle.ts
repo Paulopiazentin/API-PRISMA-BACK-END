@@ -93,17 +93,14 @@ const buscardadosloginControle = async (req: Request, res: Response) => {
     const login: IloginAluno = req.body;
     try {
         const aluno = await buscardadosloginServico(login);
-        return res.status(200).json({
-            'sucesso': aluno > 0,
-            'mensagem': 'Login realizado com sucesso',
-            'idAluno': aluno
-        })
+
+        return res.status(200).json(aluno);
     } catch (erro) {
         return res.status(500).json({
             'sucesso': false,
             'mensagem': erro,
             'idAluno': null
-        })
+        });
     }
 }
 

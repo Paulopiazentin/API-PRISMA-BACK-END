@@ -1,4 +1,4 @@
-import { hash } from "../Utils/criptografia";
+import { gerarToken, hash } from "../Utils/criptografia";
 import {
     buscaTodosAlunosRepositorio,
     adicionarAlunoRepositorio,
@@ -116,7 +116,16 @@ const buscardadosloginServico = async (data: IloginAluno) => {
         if (aluno?.senha !== hash(senha)) {
             throw('Usuario ou Senha incorreta');
         }
-        return aluno.id;
+
+        const token = gerarToken(aluno.id);
+
+        const resultado = {
+            "sucesso": aluno.id > 0,
+            "mensagem": "Login realizado com sucesso",
+            "token": token,
+        }
+
+        return resultado;
 
     } catch(erro) {
         throw (erro);
