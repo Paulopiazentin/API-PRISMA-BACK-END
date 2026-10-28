@@ -1,5 +1,5 @@
 import {Request, Response} from "express";
-import { adicionaAlunoServico, buscaTodosAlunosServico, buscaUmAlunoServico 
+import { adicionarAlunoServico, buscaTodosAlunosServico, buscaUmAlunoServico 
 } from "../servico/AlunosServico";
 import {deleteAlunoServico} from "../servico/AlunosServico";
 import { IAluno } from "../repositorio/AlunosRepositorio";
@@ -37,7 +37,7 @@ const buscaUmAluno = async (req: Request, res: Response) => {
 const adicionaAlunoControle = async (req: Request, res: Response) => {
     const alunoRequest: IAluno = req.body;
     try {
-        const aluno = await adicionaAlunoServico(alunoRequest);
+        const aluno = await adicionarAlunoServico(alunoRequest);
         return res.status(201).json({
             'sucesso': aluno.id > 0,
             'mensagem': 'Aluno adicionado com sucesso',
@@ -101,7 +101,7 @@ const buscardadosloginControle = async (req: Request, res: Response) => {
     } catch (erro) {
         return res.status(500).json({
             'sucesso': false,
-            'mensagem': 'Erro ao realizar login',
+            'mensagem': erro,
             'idAluno': null
         })
     }

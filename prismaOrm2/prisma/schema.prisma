@@ -13,7 +13,7 @@ datasource db {
 }
 
 model Alunos {
-  id       number    @id @default(autoincrement())
+  id       Int    @id @default(autoincrement())
   nome     String
   email    String   @unique
   cod_usuario String 
