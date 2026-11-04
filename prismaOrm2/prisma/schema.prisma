@@ -20,6 +20,8 @@ model Alunos {
   senha String
   idade    Int
   criadoEm DateTime @default(now())
+
+  emprestimos Emprestimos[]
 }
 
 model Livros {
@@ -29,4 +31,19 @@ model Livros {
   editora    String
   anoPublicacao Int
   criadoEm   DateTime @default(now())
+
+   emprestimos Emprestimos[]
+}
+
+model Emprestimos {
+  ID_Emprestimo Int        @id @default(autoincrement())
+  ID_Livro      Int
+  ID_Aluno      Int
+    DT_Inicio   DateTime @default(now())
+  DT_Fim        DateTime
+  Observacao    String
+
+  aluno Alunos @relation(fields: [ID_Aluno], references: [id])
+  livro Livros @relation(fields: [ID_Livro], references: [id])
+
 }
